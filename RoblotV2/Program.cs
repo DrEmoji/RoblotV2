@@ -4,6 +4,7 @@ namespace RoblotV2
 {
     internal static class Program
     {
+        public static List<Client> Clients = new List<Client>();
         [STAThread]
         static void Main()
         {

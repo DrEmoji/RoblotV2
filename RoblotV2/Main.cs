@@ -16,70 +16,9 @@ namespace RoblotV2
         public static bool usingbots = false;
         public static string[] cookies = File.ReadAllLines("cookies.txt");
         private static string gameid = string.Empty;
-
         public Main()
         {
             InitializeComponent();
-        }
-
-        private string LaunchRoblox(string authcode)
-        {
-            Random rnd = new Random();
-            long browserTrackerId = 55393295400 + rnd.Next(1, 100);
-            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
-            int launchTime = (int)t.TotalSeconds * 1000;
-
-            string url = $@"roblox-player:1+launchmode:play+gameinfo:{authcode}+launchtime:{launchTime}+placelauncherurl:https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGame&browserTrackerId=" + browserTrackerId + "&placeId=" + gameid + "&isPlayTogetherGame=false+browsertrackerid:" + browserTrackerId + "+robloxLocale:en_us+gameLocale:en_us";
-
-            return url;
-        }
-
-        public async Task<string> Visit(string cookie)
-        {
-            try
-            {
-                var baseAddress = new Uri("https://auth.roblox.com/v1/authentication-ticket/");
-                var cookieContainer = new CookieContainer();
-                var request = new HttpRequestMessage(HttpMethod.Post, baseAddress);
-                request.Headers.Add("User-Agent", "Roblox/WinInet");
-                request.Headers.Add("Referer", "https://www.roblox.com/develop");
-                request.Headers.Add("RBX-For-Gameauth", "true");
-
-                var request2 = new HttpRequestMessage(HttpMethod.Post, baseAddress);
-                request2.Headers.Add("User-Agent", "Roblox/WinInet");
-                request2.Headers.Add("Referer", "https://www.roblox.com/develop");
-                request2.Headers.Add("RBX-For-Gameauth", "true");
-
-                using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer, AllowAutoRedirect = false })
-                using (var client = new HttpClient(handler))
-                {
-                    cookieContainer.Add(baseAddress, new Cookie(".ROBLOSECURITY", cookie));
-                    var result = await client.SendAsync(request);
-
-
-
-                    if (result.Headers.Contains("X-CSRF-TOKEN"))
-                    {
-                        var xcsrf = (String[])result.Headers.GetValues("X-CSRF-TOKEN");
-                        request2.Headers.Add("X-CSRF-TOKEN", xcsrf[0]);
-                        result = await client.SendAsync(request2);
-                        var authcode = (String[])result.Headers.GetValues("rbx-authentication-ticket");
-                        return authcode[0];
-                    }
-                    else
-                    {
-                        Utils.Log(ConsoleColor.Red,"Your cookie is not valid");
-                        return "false";
-                    }
-                }
-
-            }
-            catch (Exception exc)
-            {
-
-                Utils.Log(ConsoleColor.Red, exc.ToString());
-            }
-            return "";
         }
 
 
@@ -87,7 +26,7 @@ namespace RoblotV2
         {
             int maxclients = Int32.Parse(textBox3.Text);
             usingbots = !usingbots;
-            Handler.isbot = true;
+                Handler.isbot = true;
             if (usingbots)
             {
                 gameid = textBox1.Text;
@@ -95,29 +34,12 @@ namespace RoblotV2
                 {
                     Process.Start("rbxsilent.exe");
                 }
-                for (int clients = 0; clients < maxclients;)
+                for (int clients = 0; clients < maxclients; clients++)
                 {
-                    var task1 = Visit(cookies[clients]);
-                    var results = await Task.WhenAll(task1);
-                    if (!(results[0] == "false") && !String.IsNullOrEmpty(results[0]))
-                    {
-                        Utils.Log(ConsoleColor.Cyan,"Got token");
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.CreateNoWindow = true;
-                        startInfo.UseShellExecute = true;
-                        startInfo.FileName = LaunchRoblox(results[0]);
-                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        var game = Process.Start(startInfo);
-                        Utils.Log(ConsoleColor.Blue, "Launched");
-                        game.WaitForExit();
-                        Utils.Log(ConsoleColor.Green, "Done");
-                        clients++;
-                    }
-                    else
-                    {
-                        clients = maxclients;
-                        continue;
-                    }
+                    Client RobloxClient = new Client();
+                    Program.Clients.Add(RobloxClient);
+                    RobloxClient.auth = cookies[clients];
+                    await RobloxClient.Start(gameid);
                 }
                 if (checkBox1.Checked)
                 {
@@ -131,11 +53,14 @@ namespace RoblotV2
                         secstartInfo.Arguments = "/C TASKKILL /F /IM rbxsilent.exe";
                         secprocess.StartInfo = secstartInfo;
                         secprocess.Start();
-                        Handler.isbot = false;
                     }).Start();
                 }
+                new Thread((ThreadStart)delegate ()
+                {
+                    Thread.Sleep(20000);
+                    Handler.isbot = false;
+                }).Start();
                 button1.Text = "Stop Bots";
-
             }
             else
             {
@@ -194,6 +119,14 @@ namespace RoblotV2
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            foreach(Client BotClient in Program.Clients)
+            {
+                Utils.Log(ConsoleColor.DarkGreen, $"Username: {BotClient.username}, ID: {BotClient.id}, BotNum: {BotClient.botnum}");
+            }
         }
     }
 }

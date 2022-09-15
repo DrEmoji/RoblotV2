@@ -42,6 +42,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -162,11 +163,12 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Purple;
+            this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Location = new System.Drawing.Point(46, 528);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(408, 195);
+            this.panel3.Size = new System.Drawing.Size(408, 309);
             this.panel3.TabIndex = 5;
             // 
             // button3
@@ -200,6 +202,17 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(408, 37);
             this.panel4.TabIndex = 7;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button5.Location = new System.Drawing.Point(56, 173);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(291, 52);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Print Bot Info";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Main
             // 
@@ -242,5 +255,6 @@
         private TextBox textBox2;
         private CheckBox checkBox1;
         private TextBox textBox3;
+        private Button button5;
     }
 }

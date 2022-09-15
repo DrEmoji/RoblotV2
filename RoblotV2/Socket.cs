@@ -31,7 +31,7 @@ namespace RoblotV2
 
     internal class Handler : WebSocketBehavior
     {
-        public int botnum = 0;
+        public static int botnum = 0;
         public static bool isbot = false;
         protected override void OnMessage(MessageEventArgs Message)
         {
@@ -44,17 +44,25 @@ namespace RoblotV2
                 {
                     botnum += 1;
                     WebSocket.SendMessage($"sendid/{data}/{botnum}/{isbot}");
-                    Log(ConsoleColor.Blue, $"{data} [{botnum}] Has Connected to Socket");
-                }
-                if (CMD == "Log")
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(data);
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (CMD == "ResetNum")
-                {
-                    botnum = 0;
+                    if (isbot)
+                    {
+                        Log(ConsoleColor.Blue, $"{data} [{botnum}] Has Connected to Socket");
+                        Client BotClient = Program.Clients[botnum - 1];
+                        BotClient.botnum = botnum;
+                        BotClient.username = data;
+                        BotClient.id = CMDInfo[2];
+                        BotClient.Loaded = true;
+                    }
+                    if (CMD == "Log")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(data);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    if (CMD == "ResetNum")
+                    {
+                        botnum = 0;
+                    }
                 }
             }
             catch { }
@@ -63,10 +71,6 @@ namespace RoblotV2
         protected override void OnError(WebSocketSharp.ErrorEventArgs e)
         {
             Console.WriteLine("Error Thrown in Socket" + e);
-        }
-        protected override void OnOpen()
-        {
-            Console.WriteLine("Bot Has connected to the server.");
         }
 
         protected override void OnClose(CloseEventArgs e)

@@ -26,5 +26,15 @@ namespace RoblotV2
         {
             OpenChildForms(new Main());
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenChildForms(new Movement());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
