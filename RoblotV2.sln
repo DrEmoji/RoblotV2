@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoblotV2", "RoblotV2\RoblotV2.csproj", "{D2D56D83-A58B-4E92-A613-59F585B48853}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2D56D83-A58B-4E92-A613-59F585B48853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D56D83-A58B-4E92-A613-59F585B48853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D56D83-A58B-4E92-A613-59F585B48853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D56D83-A58B-4E92-A613-59F585B48853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0DF1282-DAA1-4FD2-BA4A-D3F4504B07D0}
+	EndGlobalSection
+EndGlobal
