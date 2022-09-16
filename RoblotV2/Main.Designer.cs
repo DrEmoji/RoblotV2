@@ -39,10 +39,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -83,7 +84,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Purple;
+            this.panel1.BackColor = System.Drawing.Color.Red;
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.textBox2);
@@ -140,19 +141,21 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Violet;
+            this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Controls.Add(this.label1);
+            this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(46, 36);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(408, 37);
             this.panel2.TabIndex = 5;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(161, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 37);
@@ -162,14 +165,26 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Purple;
+            this.panel3.BackColor = System.Drawing.Color.Red;
+            this.panel3.Controls.Add(this.button6);
             this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Location = new System.Drawing.Point(46, 528);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(408, 309);
+            this.panel3.Size = new System.Drawing.Size(408, 317);
             this.panel3.TabIndex = 5;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button5.Location = new System.Drawing.Point(56, 173);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(291, 52);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Print Bot Info";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button3
             // 
@@ -187,7 +202,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(113, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(185, 37);
@@ -196,34 +211,37 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.Violet;
+            this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.Controls.Add(this.label2);
+            this.panel4.ForeColor = System.Drawing.Color.White;
             this.panel4.Location = new System.Drawing.Point(46, 504);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(408, 37);
             this.panel4.TabIndex = 7;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
-            // button5
+            // button6
             // 
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(56, 173);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(291, 52);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Print Bot Info";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button6.Location = new System.Drawing.Point(56, 241);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(291, 52);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "Print Players";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1698, 1338);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
             this.Text = "Main";
@@ -256,5 +274,6 @@
         private CheckBox checkBox1;
         private TextBox textBox3;
         private Button button5;
+        private Button button6;
     }
 }

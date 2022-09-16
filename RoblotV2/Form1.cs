@@ -36,5 +36,15 @@ namespace RoblotV2
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenChildForms(new Executor());
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

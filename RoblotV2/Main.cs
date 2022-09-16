@@ -24,43 +24,25 @@ namespace RoblotV2
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            int maxclients = Int32.Parse(textBox3.Text);
+            Program.Clients.Clear();
+            Program.maxclients = Int32.Parse(textBox3.Text);
             usingbots = !usingbots;
-                Handler.isbot = true;
+            Handler.isbot = true;
             if (usingbots)
             {
+                button1.Text = "Stop Bots";
                 gameid = textBox1.Text;
                 if (checkBox1.Checked)
                 {
                     Process.Start("rbxsilent.exe");
                 }
-                for (int clients = 0; clients < maxclients; clients++)
+                for (int clients = 0; clients < Program.maxclients; clients++)
                 {
                     Client RobloxClient = new Client();
                     Program.Clients.Add(RobloxClient);
                     RobloxClient.auth = cookies[clients];
                     await RobloxClient.Start(gameid);
                 }
-                if (checkBox1.Checked)
-                {
-                    new Thread((ThreadStart)delegate ()
-                    {
-                        Thread.Sleep(5000);
-                        System.Diagnostics.Process secprocess = new System.Diagnostics.Process();
-                        System.Diagnostics.ProcessStartInfo secstartInfo = new System.Diagnostics.ProcessStartInfo();
-                        secstartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        secstartInfo.FileName = "cmd.exe";
-                        secstartInfo.Arguments = "/C TASKKILL /F /IM rbxsilent.exe";
-                        secprocess.StartInfo = secstartInfo;
-                        secprocess.Start();
-                    }).Start();
-                }
-                new Thread((ThreadStart)delegate ()
-                {
-                    Thread.Sleep(20000);
-                    Handler.isbot = false;
-                }).Start();
-                button1.Text = "Stop Bots";
             }
             else
             {
@@ -127,6 +109,21 @@ namespace RoblotV2
             {
                 Utils.Log(ConsoleColor.DarkGreen, $"Username: {BotClient.username}, ID: {BotClient.id}, BotNum: {BotClient.botnum}");
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            WebSocket.SendMessage("printplayers");
         }
     }
 }

@@ -53,6 +53,18 @@ namespace RoblotV2
                         BotClient.id = CMDInfo[2];
                         BotClient.Loaded = true;
                     }
+                    if (botnum == Program.maxclients)
+                    {
+                        isbot = false;
+                        System.Diagnostics.Process secprocess = new System.Diagnostics.Process();
+                        System.Diagnostics.ProcessStartInfo secstartInfo = new System.Diagnostics.ProcessStartInfo();
+                        secstartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                        secstartInfo.FileName = "cmd.exe";
+                        secstartInfo.Arguments = "/C TASKKILL /F /IM rbxsilent.exe";
+                        secprocess.StartInfo = secstartInfo;
+                        secprocess.Start();
+                        Log(ConsoleColor.Green, "You Can Now Launch The Game");
+                    }
                     if (CMD == "Log")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
