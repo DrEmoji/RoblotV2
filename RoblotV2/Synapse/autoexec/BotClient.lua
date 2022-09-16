@@ -135,14 +135,10 @@ function RunCommand(Msg)
                 local RADIUS = 5 -- how far the orbit is
                 local ECLIPSE = 1 -- ranges from 0 to 1, perfect circle if 1
                 local ROTATION = CFrame.Angles(0,0,0) --rotate which direction to rotate around
-
-
                 local sin, cos = math.sin, math.cos
                 local ROTSPEED = math.pi*2/ORBIT_TIME
                 ECLIPSE = ECLIPSE * RADIUS
                 local runservice = game:GetService('RunService')
-
-                -- There are many ways to run this loop, you could do while true do if you want, if so use this: rot = rot + wait() * ROTSPEED 
                 local rot = 0
                 _G.OrbitConnection = game:GetService('RunService').Stepped:connect(function(t, dt)
                     rot = rot + dt * ROTSPEED

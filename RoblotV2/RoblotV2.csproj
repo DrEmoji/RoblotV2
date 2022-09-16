@@ -10,6 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Synapse\auth\**" />
+    <Compile Remove="Synapse\bin\**" />
+    <Compile Remove="Synapse\obj\**" />
+    <EmbeddedResource Remove="Synapse\auth\**" />
+    <EmbeddedResource Remove="Synapse\bin\**" />
+    <EmbeddedResource Remove="Synapse\obj\**" />
+    <None Remove="Synapse\auth\**" />
+    <None Remove="Synapse\bin\**" />
+    <None Remove="Synapse\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Synapse\BotClient.config" />
+    <None Remove="Synapse\README.txt" />
+    <None Remove="Synapse\Synapse Launcher.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="icon.ico" />
   </ItemGroup>
 
